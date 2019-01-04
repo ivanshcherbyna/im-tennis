@@ -1,6 +1,10 @@
 <!-- search -->
-<form class="search" method="get" action="<?php echo home_url(); ?>" role="search">
-	<input class="search-input" type="search" name="s" placeholder="<?php _e( 'To search, type and hit enter.', THEME_OPT ); ?>">
-	<button class="search-submit" type="submit" role="button"><?php _e( 'Search', THEME_OPT ); ?></button>
+<form class='header-search ml-5 search' method="get" action="<?php echo home_url(); ?>" role="search">
+    <div class="input-group search-input">
+        <input type="text" class="form-control header-search-input" id="searchInput" placeholder="<?php _e('Поиск',THEME_OPT); ?>" type="search" name="s" >
+        <div class="input-group-append">
+            <div class="input-group-text"><button type="submit" role="button" class="icon-search" style="background: none; border: none;"></button></div>
+        </div>
+    </div>
 </form>
 <!-- /search -->

@@ -331,4 +331,15 @@ function get_user(){
 }
 add_action('my_show_user','get_user');
 /* ---------- ADD ACTION BY SHOW USER ON FRONT-END HEADER----------------*/
+/* --------------------update minicart count with total price --------------------------*/
+add_filter( 'woocommerce_add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment' );
+function woocommerce_header_add_to_cart_fragment( $fragments ) {
+    ob_start();
+    ?>
+    <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" title="<?php _e( 'View your shopping cart' ); ?>"><?php echo sprintf (_n( '%d item', '%d items', WC()->cart->get_cart_contents_count() ), WC()->cart->get_cart_contents_count() ); ?> - <?php echo WC()->cart->get_cart_total(); ?></a>
+    <?php
+    $fragments['span.items-count'] = ob_get_clean();
+    return $fragments;
+}
+/* --------------------update minicart count with total price--------------------------*/
 ?>

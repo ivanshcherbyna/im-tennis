@@ -7,8 +7,32 @@ global $mytheme;
 				<div class="container d-flex flex-wrap">
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-9 p-0 footer-column">
 
+                        <?php if (is_array($mytheme['menu-repeater-items'])): ?>
+
+                        <h4 class='footer-column-header'><?php _e('Разделы сайта',THEME_OPT) ?></h4>
+                        <ul class='footer-column-list'>
+                            <?php foreach ($mytheme['menu-repeater-items'] as $item): ?>
+
+                                <li><a href="<?php echo $item['menu-link'] ?>" class='footer-column-list-item'><?php echo $item['menu-title'] ?></a></li>
+
+                            <?php endforeach; ?>
+                        </ul>
+                        <?php endif; ?>
+
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-9 p-0 footer-column">
+
+                        <?php if (is_array($mytheme['info-repeater-items'])): ?>
+
+                        <h4 class='footer-column-header'><?php _e('Информация',THEME_OPT) ?></h4>
+                        <ul class='footer-column-list'>
+                            <?php foreach ($mytheme['info-repeater-items'] as $item): ?>
+
+                                <li><a href="<?php echo $item['info-link'] ?>" class='footer-column-list-item'><?php echo $item['info-title'] ?></a></li>
+
+                            <?php endforeach; ?>
+                        </ul>
+                        <?php endif; ?>
 
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-9 p-0 footer-column">
@@ -21,10 +45,22 @@ global $mytheme;
                                 </div>
                             </li>
                             <li class="footer-column-contact-item d-flex align-items-center"><span class="icon-mail mr-3"></span><a href="mailto:<?php echo $mytheme['header-email'] ?>"
-                                                                                                                                    class='footer-column-contact-item'><?php echo $mytheme['header-email'] ?>-</a></li>
+                                                                                                                                    class='footer-column-contact-item'><?php echo $mytheme['header-email'] ?></a></li>
                         </ul>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-9 p-0 footer-column">
+
+                        <?php if (is_array($mytheme['social-repeater-items'])): ?>
+
+                        <h4 class='footer-column-header'><?php _e('Мы в соцсетях', THEME_OPT) ?></h4>
+                        <div class="d-flex footer-column-social-list">
+                            <?php foreach ($mytheme['social-repeater-items'] as $item): ?>
+
+                                <a href='<?php echo $item['social-link'] ?>' title="<?php echo $item['social-select'] ?>"><span class="icon-<?php echo $item['social-select'] ?> footer-column-social-item mr-3"></span></a>
+
+                            <?php endforeach; ?>
+                        </div>
+                        <?php endif; ?>
 
                     </div>
                 </div>

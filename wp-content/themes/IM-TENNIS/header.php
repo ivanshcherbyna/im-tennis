@@ -38,14 +38,7 @@
             </div>
             <div class="container d-flex justify-content-between flex-wrap mt-2">
                 <?php header_nav(); ?>
-                <form class='header-search ml-5'>
-                    <div class="input-group ">
-                        <input type="text" class="form-control header-search-input" id="searchInput" placeholder="Поиск">
-                        <div class="input-group-append">
-                            <div class="input-group-text"><span class="icon-search"></span></div>
-                        </div>
-                    </div>
-                </form>
+                <?php get_search_form() ?>
                 <a href="<?php echo wc_get_cart_url(); ?>" class='btn-cart d-flex align-items-center justify-content-center'><span class="icon-cart mr-2"></span>Корзина
                     пуста</a>
             </div>

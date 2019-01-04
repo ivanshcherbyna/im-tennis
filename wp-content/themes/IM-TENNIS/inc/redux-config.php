@@ -78,29 +78,129 @@ if ( ! class_exists( 'Redux_Framework_Lwp_config' ) ) {
             /* Set fields */
             $footer_fields = array(
                 array(
-                    'title' => __('Logo', THEME_OPT),
-                    'type' => 'media',
-                    'id' =>'logo-footer-img'
-                ),
-
-                array(
-                    'id' =>'footer-text',
-                    'type' => 'editor',
-                    'title' => __('Centered footer text', THEME_OPT)
+                    'id' => 'section-start',
+                    'type' => 'section',
+                    'title' => __('Секция', THEME_OPT),
+                    'subtitle' => __('Разделы сайта.', THEME_OPT),
+                    'indent' => true
                 ),
                 array(
-                    'id' =>'linkedId-text',
-                    'type' => 'text',
-                    'title' => __('LinkedId URL', THEME_OPT)
-
-                )
+                    'id'             => 'menu-repeater-items',
+                    'type'           => 'repeatable_list',
+                    'accordion'      => true,
+                    'title'          => __('Разделы сайта:', THEME_OPT),
+                    'add_button'     => __( 'Добавить раздел', THEME_OPT),
+                    'remove_button'  => __( 'Убрать раздел', THEME_OPT),
+                    'fields'         => array(
+                        array(
+                            'id'       => 'menu-title',
+                            'type'     => 'text',
+                            'title'    => __('Название раздела', THEME_OPT),
+                        ),
+                        array(
+                            'id'       => 'menu-link',
+                            'type'     => 'text',
+                            'validate' => 'url',
+                            'title'    => __('URL', THEME_OPT),
+                        ),
+                    )
+                ),
+                array(
+                    'id'     => 'section-end',
+                    'type'   => 'section',
+                    'indent' => false,
+                ),
+                array(
+                    'id' => 'section-start2',
+                    'type' => 'section',
+                    'title' => __('Секция', THEME_OPT),
+                    'subtitle' => __('Информация', THEME_OPT),
+                    'indent' => true
+                ),
+                array(
+                    'id'             => 'info-repeater-items',
+                    'type'           => 'repeatable_list',
+                    'accordion'      => true,
+                    'title'          => __('Информация сайта:', THEME_OPT),
+                    'add_button'     => __( 'Добавить пункт', THEME_OPT),
+                    'remove_button'  => __( 'Убрать пункт', THEME_OPT),
+                    'fields'         => array(
+                        array(
+                            'id'       => 'info-title',
+                            'type'     => 'text',
+                            'title'    => __('Название пункта', THEME_OPT),
+                        ),
+                        array(
+                            'id'       => 'info-link',
+                            'type'     => 'text',
+                            'validate' => 'url',
+                            'title'    => __('URL', THEME_OPT),
+                        ),
+                    )
+                ),
+                array(
+                    'id'     => 'section-end2',
+                    'type'   => 'section',
+                    'indent' => false,
+                ),
+                array(
+                    'id'     => 'section-end',
+                    'type'   => 'section',
+                    'indent' => false,
+                ),
+                array(
+                    'id' => 'section-start4',
+                    'type' => 'section',
+                    'title' => __('Секция', THEME_OPT),
+                    'subtitle' => __('Мы в соц. сетях', THEME_OPT),
+                    'indent' => true
+                ),
+                array(
+                    'id'             => 'social-repeater-items',
+                    'type'           => 'repeatable_list',
+                    'accordion'      => true,
+                    'title'          => __('МЫ В СОЦСЕТЯХ:', THEME_OPT),
+                    'add_button'     => __( 'Добавить пункт', THEME_OPT),
+                    'remove_button'  => __( 'Убрать пункт', THEME_OPT),
+                    'fields'         => array(
+                        array(
+                            'id'       => 'social-select',
+                            'type'     => 'select',
+                            'multi'    => false,
+                            'subtitle' => __('Выберите соц сеть', 'redux-framework-demo'),
+                            'desc'     => __('текущая социальная сеть', 'redux-framework-demo'),
+                            //Must provide key => value pairs for radio options
+                            'options'  => array(
+                                'instragram' => 'instragram',
+                                'youtube' => 'youtube',
+                                'facebook ' => 'facebook '),
+//                            'default'  => array('2','3')
+                        ),
+                        array(
+                            'id'       => 'social-link',
+                            'type'     => 'text',
+                            'validate' => 'url',
+                            'title'    => __('URL', THEME_OPT),
+                        ),
+                    )
+                ),
+                array(
+                    'id'     => 'section-end4',
+                    'type'   => 'section',
+                    'indent' => false,
+                ),
 
             );
             $header_fields = array(
                 array(
-                    'title' => __('Логотип', THEME_OPT),
+                    'title' => __('Логотип в шапке', THEME_OPT),
                     'type' => 'media',
                     'id' =>'logo-header-img'
+                ),
+                array(
+                    'title' => __('Логотип в подвале', THEME_OPT),
+                    'type' => 'media',
+                    'id' =>'logo-footer-img'
                 ),
 
                 array(
@@ -112,22 +212,22 @@ if ( ! class_exists( 'Redux_Framework_Lwp_config' ) ) {
                 array(
                     'id'       => 'header-tel-1',
                     'type'     => 'text',
-                    'title'    => __('Tel 1', THEME_OPT),
+                    'title'    => __('Контактный телефон 1', THEME_OPT),
                 ),
                 array(
                     'id'       => 'header-tel-2',
                     'type'     => 'text',
-                    'title'    => __('Tel 2', THEME_OPT),
+                    'title'    => __('Контактный телефон 2', THEME_OPT),
                 ),
             );
             /* Set sections */
             $this->sections[] = array(
-                'title'  => __( 'Шапка', THEME_OPT ),
+                'title'  => __( 'Главные настройки темы', THEME_OPT ),
                 'icon'   => 'el-icon-cog',
                 'fields' => $header_fields
             );
             $this->sections[] = array(
-                'title'  => __( 'Подвал', THEME_OPT ),
+                'title'  => __( 'Разделы подвала', THEME_OPT ),
                 'icon'   => 'el-icon-cog',
                 'fields' => $footer_fields
             );
