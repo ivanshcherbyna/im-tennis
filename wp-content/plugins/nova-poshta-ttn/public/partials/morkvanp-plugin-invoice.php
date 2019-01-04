@@ -41,6 +41,8 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 
 	public $sender_street;
 
+	public $sender_warehouse_number;
+
 	public $sender_area;
 
 	public $sender_building;
@@ -130,6 +132,13 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 
 		$url = "https://api.novaposhta.ua/v2.0/json/";
 
+		/**
+		 * Getting settings of WooShipping plugin
+		 */
+
+		$shipping_settings = get_option('woocommerce_nova_poshta_shipping_method_settings');
+		$this->sender_city = $shipping_settings["city_name"];
+
 		$methodProperties = array(
 			"FindByString" => $this->sender_city
 		);
@@ -153,6 +162,14 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 		} else {
 			$obj = json_decode($response, true);
 			$this->sender_city = $obj["data"][0]["Ref"];
+
+			// echo "<pre><b>POST data: </b>";
+			// var_dump($_POST);
+			// echo "</pre>";
+
+			// echo "<pre><b>Sender City: </b>";
+			// var_dump($response);
+			// echo "</pre>";
 		}
 
 	}
@@ -170,6 +187,13 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 		$this->sender_middle_name = $names[0];
 		$this->sender_last_name = $names[2];
 		$this->sender_first_name = $names[1];
+
+		/**
+		 * Getting settings of WooShipping plugin
+		 */
+
+		$shipping_settings = get_option('woocommerce_nova_poshta_shipping_method_settings');
+		$sender_city = $shipping_settings["city_name"];
 
 		$methodProperties = array(
 			"CounterpartyProperty" => "Sender",
@@ -200,6 +224,9 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 		} else {
 			$obj = json_decode( $response, true );
 			$this->sender_ref = $obj["data"][0]["Ref"];
+			// echo "<pre><b>Sender Ref: </b>";
+			// var_dump($response);
+			// echo "</pre>";
 		}
 
 		return $this;
@@ -233,10 +260,13 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 		curl_close( $curl );
 
 		if ( $err ) {
-			exit('Вибачаємось, але сталсь помилка');
+			exit('Вибачте, але сталась помилка');
 		} else {
 			$obj = json_decode( $response, true );
 			$this->sender_contact = $obj["data"][0]["Ref"];
+			// echo "<pre><b>Sender contact: </b>";
+			// var_dump($response);
+			// echo "</pre>";
 		}
 
 		return $this;
@@ -272,6 +302,9 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 		} else {
 			$obj = json_decode( $response, true );
 			$this->sender_area = $obj["data"][0]["Area"];
+			// echo "<pre><b>Sender area:</b>";
+			// var_dump($response);
+			// echo "</pre>";
 		}
 
 		return $this;
@@ -279,6 +312,40 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 
 	public function senderFindStreet()
 	{
+
+		$shipping_settings = get_option('woocommerce_nova_poshta_shipping_method_settings');
+		$warehouse = $shipping_settings["warehouse_name"];
+		$warehouse_full = explode(" ", $warehouse);
+
+		$warehouse_number = $warehouse_full[1];
+
+		$warehouse_number = str_replace("№", "", $warehouse_number);
+
+		$new_arr = implode(" ", $warehouse_full);
+		// var_dump($new_arr);
+
+		$sup_arr = explode(":", $new_arr);
+		// var_dump($sup_arr);
+
+		$street_name = $sup_arr[1];
+		$street_name = trim($street_name);
+		// var_dump($street_name);
+
+		$street_name = explode("вул.", $street_name);
+		$street_name = implode(" ", $street_name);
+		$street_name = trim($street_name);
+		// var_dump($street_name);
+
+		$street_name = explode(",", $street_name);
+		// var_dump($street_name);
+
+		$street_name_full = $street_name[0];
+		$street_number = $street_name[1];
+		$street_number = trim($street_number);
+		
+		$this->sender_street = $street_name_full;
+		$this->sender_building = $street_number;
+		$this->sender_warehouse_number = $warehouse_number;
 
 		$invoiceController = new MNP_Plugin_Invoice_Controller();
 
@@ -308,8 +375,13 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 			exit('Вибачаємось, але сталась помилка');
 		} else {
 			$obj = json_decode( $response, true );
-			$this->sender_street = $obj["data"][0]["Ref"];
+			$data = get_option('woocommerce_nova_poshta_shipping_method_settings');
+			$this->sender_street = $data["warehouse"];
 			$street_name = $obj["data"][0]["Description"];
+
+			// echo "<pre><b>Sender street: </b>";
+			// var_dump($response);
+			// echo "</pre>";
 		}
 
 		return $this;
@@ -350,6 +422,9 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 		} else {
 			$obj = json_decode( $response, true );
 			$this->sender_address = $obj["data"][0]["Ref"];
+			// echo "<pre><b>Sender address: </b>";
+			// var_dump($response);
+			// echo "</pre>";
 		}
 
 		return $this;
@@ -425,6 +500,10 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 			$obj = json_decode( $response, true );
 			$this->recipient_area = $obj["data"][0]["AreaDescription"];
 			$this->recipient_city_ref = $obj["data"][0]["Ref"];
+
+			// echo "<pre><b>Recipient area: </b>";
+			// var_dump($response);
+			// echo "</pre>";
 		}
 
 		return $this;
@@ -563,6 +642,9 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 
 		$invoiceController = new MNP_Plugin_Invoice_Controller();
 		
+		$wooshipping_settings = get_option('woocommerce_nova_poshta_shipping_method_settings');
+		$this->sender_address = $wooshipping_settings["warehouse"];
+
 		$methodProperties = array(
 			"NewAddress" => "1",
 			"PayerType" => "Recipient",
@@ -581,6 +663,7 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 			"RecipientCityName" => $this->recipient_city,
 			"RecipientArea" => $this->recipient_area_regions,
 			"RecipientAreaRegions" => $this->recipient_area_regions,
+			"RecipientAddressName" => $this->recipient_address_name,
 			"RecipientHouse" => $this->recipient_address_name,
 			"RecipientFlat" => "1",
 			"RecipientName" => $this->recipient_name,
@@ -588,6 +671,10 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 			"RecipientsPhone" => $this->recipient_phone,
 			"Datetime" => $this->datetime
 		);
+
+		// echo "<pre><b>Invoice Method properties: </b>";
+		// var_dump($methodProperties);
+		// echo "</pre>";
 
 		$invoice = array(
 			"apiKey" => $this->api_key,
@@ -613,6 +700,10 @@ class MNP_Plugin_Invoice extends MNP_Plugin_Invoice_Controller {
 			$obj = json_decode( $response, true );
 			$document_number = $obj["data"][0]["Ref"];
 			$document_id = $obj["data"][0]["IntDocNumber"];
+
+			// echo "<pre><b>Invoice: </b>";
+			// var_dump($response);
+			// echo "</pre>";
 
 			session_start();
 			

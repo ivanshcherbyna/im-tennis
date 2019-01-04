@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * Provide a public-facing view for the plugin
@@ -12,6 +12,9 @@
  * @subpackage Plugin_Name/public/partials
  */
 ?>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+
 <div class="container">
 <div class="row">
 	<h1>Nova Poshta TTN</h1>
@@ -31,6 +34,53 @@
 					settings_fields( 'morkvanp_options_group' );
 					do_settings_sections( 'morkvanp_plugin' );
 					submit_button();
+				?>
+				<?php
+					$shipping_settings = get_option('woocommerce_nova_poshta_shipping_method_settings');
+
+					$warehouse = $shipping_settings["warehouse_name"];
+					$warehouse_full = explode(" ", $warehouse);
+
+					// echo "<pre>Warehouse full: ";
+					// var_dump($shipping_settings);
+					// echo "</pre>";
+					$warehouse_number = $warehouse_full["1"];
+					$warehouse_number = str_replace("№", "", $warehouse_number);
+					// echo "<pre>Warehouse number: ";
+					// var_dump($warehouse_number);
+					// echo "</pre>";
+
+					$new_arr = implode(" ", $warehouse_full);
+					// echo "<pre>New arr:";
+					// var_dump($new_arr);
+					// echo "</pre>";
+
+					$sup_arr = explode(":", $new_arr);
+					// echo "<pre>Super arr: ";
+					// var_dump($sup_arr);
+					// echo "</pre>";
+
+					$street_name = $sup_arr[1];
+					$street_name = trim($street_name);
+					// echo "<pre>Street name:";
+					// var_dump($street_name);
+					// echo "</pre>";
+
+					$street_name = explode("вул.", $street_name);
+					$street_name = implode(" ", $street_name);
+					$street_name = trim($street_name);
+					// echo "<pre>Street name: ";
+					// var_dump($street_name);
+					// echo "</pre>";
+
+					$street_name = explode(",", $street_name);
+					// echo "<pre>Street name: ";
+					// var_dump($street_name);
+					// echo "</pre>";
+
+					$street_name_full = $street_name[0];
+					$street_number = $street_name[1];
+					$street_number = trim($street_number);
 				?>
 				<p>
 					Якщо у вас немає API ключа, то можете отримати його за посиланням <a href="http://my.novaposhta.ua/settings/index#apikeys">my.novaposhta.ua/settings/index#apikeys</a>
@@ -113,16 +163,17 @@
 				<h5><a href="https://www.facebook.com/groups/morkvasupport" class="btn btn-primary" target="_blank"><?php echo '<img src="' . plugins_url('img/messenger.png', __FILE__) . '" height="25" width="25"  />'; ?> Написати в чат</a></h5>
 			</div>
 		</div>
-		<!-- <div class="card border-primary">
+		<div class="card border-primary">
 			<div class="card-header">
-				<h3>Pro версія</h3>
+				<h3>Pro-версія</h3>
 			</div>
 			<div class="card-body">
-				Оновіться до Pro версії
-				<?php // echo '<img src="' . plugins_url('img/messenger.png', __FILE__) . '" height="170" width="170" style="padding: 20px;"  />'; ?>
-				<a href="#" class="btn btn-success">Кнопка</a>
+				<p>
+				Потрібно більше можливостей? Оновіться до Pro-версії зараз!
+				</p>
+				<h5><a href="https://www.morkva.co.ua/woocommerce-plugins/avtomatychna-heneratsiia-nakladnykh-nova-poshta/" class="btn btn-success">Хочу Pro</a></h5>
 			</div>
-		</div> -->
+		</div>
 	</div>
 </div>
 </div>

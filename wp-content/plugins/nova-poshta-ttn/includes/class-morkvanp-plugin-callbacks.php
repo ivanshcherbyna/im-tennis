@@ -48,10 +48,32 @@
 		echo '<input type="text" class="regular-text" name="text_example" value="' . $value . '" placeholder="API ключ">';
 	}
 
+	
+
+	public function morkvanpSelectRegion() {
+		$region = esc_attr( get_option( 'region' ) );
+		
+		/**
+		 * Getting settings of WooShipping plugin
+		 */
+		
+		$shipping_settings = get_option('woocommerce_nova_poshta_shipping_method_settings');
+		$region = $shipping_settings["area_name"];
+		echo '<input type="text" class="regular-text" name="region" value="' . $region . '" placeholder="Київська" readonly>';
+
+		echo '<p>Налаштування полей міста і регіона беруться із налаштувань плагіну <a href="https://wordpress.org/plugins/woo-shipping-for-nova-poshta/">WooShipping for Nova Poshta</a></p>';
+	}
+
 	public function morkvanpSelectCity()
 	{
 		$value1 = esc_attr( get_option( 'city' ) );
-		echo '<input type="text" class="regular-text" name="city" list="cities" value="' . $value1 . '" placeholder="Київ">';
+		
+		/**
+		 * Getting settings of WooShipping plugin
+		 */
+		$shipping_settings = get_option('woocommerce_nova_poshta_shipping_method_settings');
+		$value1 = $shipping_settings["city_name"];
+		echo '<input type="text" class="regular-text" name="city" list="cities" value="' . $value1 . '" placeholder="Київ" readonly>';
 				echo '
 			<datalist id="cities">
 				<option>Київ</option>
@@ -75,11 +97,6 @@
 		';
 	}
 
-	public function morkvanpSelectRegion() {
-		$region = esc_attr( get_option( 'region' ) );
-		echo '<input type="text" class="regular-text" name="region" value="' . $region . '" placeholder="Київська">';
-	}
-
 	public function morkvanpActivate() {
 		$activate = get_option( 'activate_plugin' );
 		$checked = $activate;
@@ -91,6 +108,7 @@
 	public function morkvanpPhone() {
 		$phone = esc_attr( get_option( 'phone' ) );
 		echo '<input type="text" class="regular-text" name="phone" value="' . $phone . '" placeholder="380901234567">';
+		echo '<p>Підказка: вводьте телефон у таком форматі 380901234567</p>';
 	}
 
 	public function morkvanpNames() {
@@ -105,7 +123,12 @@
 
 	public function morkvanpWarehouseAddress()
 	{
-		$warehouse = esc_attr( get_option( 'warehouse' ) );
-		echo '<input type="text" class="regular-text" name="warehouse" value="' . $warehouse . '" placeholder="Франка 14">';
+		// $warehouse = esc_attr( get_option( 'warehouse' ) );
+		$shipping_settings = get_option('woocommerce_nova_poshta_shipping_method_settings');
+		// $shipping_settings["warehouse_name"];
+		$warehouse = $shipping_settings["warehouse_name"];
+
+		echo '<input type="text" class="regular-text" name="warehouse" value="' . $warehouse . '" placeholder="Франка 14" readonly>';
+		echo '<p>Налаштування цього поля беруться із налаштувань плагіну <a href="https://wordpress.org/plugins/woo-shipping-for-nova-poshta/">WooShipping for Nova Poshta</a></p>';
 	}
  }

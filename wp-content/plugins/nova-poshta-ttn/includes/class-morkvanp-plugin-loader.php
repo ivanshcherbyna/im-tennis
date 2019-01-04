@@ -385,17 +385,6 @@ class MNP_Plugin_Loader {
 				)
 			),
 			array(
-				'id' => 'city',
-				'title' => 'Місто',
-				'callback' => array( $this->callbacks, 'morkvanpSelectCity' ),
-				'page' => 'morkvanp_plugin',
-				'section' => 'morkvanp_admin_index',
-				'args' => array(
-					'label_for' => 'city',
-					'class' => 'city'
-				)
-			),
-			array(
 				'id' => 'region',
 				'title' => 'Область',
 				'callback' => array( $this->callbacks, 'morkvanpSelectRegion' ),
@@ -404,6 +393,17 @@ class MNP_Plugin_Loader {
 				'args' => array(
 					'label_for' => 'region',
 					'class' => 'region'
+				)
+			),
+			array(
+				'id' => 'city',
+				'title' => 'Місто',
+				'callback' => array( $this->callbacks, 'morkvanpSelectCity' ),
+				'page' => 'morkvanp_plugin',
+				'section' => 'morkvanp_admin_index',
+				'args' => array(
+					'label_for' => 'city',
+					'class' => 'city'
 				)
 			),
 			array(

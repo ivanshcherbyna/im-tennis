@@ -1,0 +1,76 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?elrymi');
+  src:  url('fonts/icomoon.eot?elrymi#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?elrymi') format('truetype'),
+    url('fonts/icomoon.woff?elrymi') format('woff'),
+    url('fonts/icomoon.svg?elrymi#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow_left:before {
+  content: "\e908";
+  color: rgba(27, 27, 27, 0.5);
+}
+
+.icon-arrow_right:before {
+  content: "\e909";
+  color: rgba(27, 27, 27, 0.5);
+}
+
+.icon-cart:before {
+  content: "\e900";
+  color: #fff;
+}
+.icon-facebook:before {
+  content: "\e901";
+  color: rgba(255, 255, 255, 0.4);
+}
+.icon-instragram:before {
+  content: "\e902";
+  color: rgba(255, 255, 255, 0.4);
+}
+.icon-login:before {
+  content: "\e903";
+  color: #323131;
+}
+.icon-mail:before {
+  content: "\e904";
+  color: #323131;
+}
+.icon-phone:before {
+  content: "\e905";
+  color: #323131;
+}
+.icon-register:before {
+  content: "\e906";
+  color: #323131;
+}
+.icon-youtube:before {
+  content: "\e907";
+  color: rgba(255, 255, 255, 0.4);
+}
+.icon-youtube:hover:before, .icon-instragram:hover:before, .icon-facebook:hover:before{
+  color: rgba(255, 255, 255, 1);
+}
+.icon-search:before {
+  content: "\e986";
+  color: #069e2d;
+  cursor: pointer;
+}

@@ -71,6 +71,9 @@ if ( isset($order_data["billing"]["phone"]) ) {
 	$shipping_phone = "";
 }
 ?>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+
 <div class="container" style="padding-top: -30px;">
 
 	<form action="admin.php?page=morkvanp_invoice" method="post" name="invoice">
@@ -87,10 +90,10 @@ if ( isset($order_data["billing"]["phone"]) ) {
 			</div>
 			<div class="field">
 					<label>Місто </label>
-					<select name="invoice_sender_city" class="sender_city">
+					<!-- <select name="invoice_sender_city" class="sender_city">
 						<p>
 						<p>
-						<option value="<?php echo get_option('city'); ?>"><?php echo get_option('city'); ?></option>
+						<option value="<?php echo $shipping_settings["city_name"]; ?>"><?php echo get_option('city'); ?></option>
 						<option value="Київ">Київ</option>
 						<option value="Львів">Львів</option>
 						<option value="Івано-Франківськ">Івано-Франківськ</option>
@@ -121,7 +124,11 @@ if ( isset($order_data["billing"]["phone"]) ) {
 						<option>Білгород-Дністровський</option>
 						<option>Коломия</option>
 						<option>Макіївка</option>
-					</select>
+					</select> -->
+					<?php
+							$shipping_settings = get_option('woocommerce_nova_poshta_shipping_method_settings');
+						?>
+					<input type="text" value="<?php echo $shipping_settings["city_name"]; ?>" readonly name="invoice_sender_city" />
 			</div>
 			
 			<div class="field">
@@ -146,6 +153,13 @@ if ( isset($order_data["billing"]["phone"]) ) {
 						<option value="Pallet">Паллети</option>
 						<option value="Parcel">Посилка</option>
 					</select>
+			</div>
+
+			<div class="field">
+				<p>
+				Платник по замовчуванню отримувач.
+				Оголошена вартість автоматично дорівнює вартості замовлення.
+				</p>
 			</div>
 
 			<div class="field" style="float: left;margin-top: 20px;">
@@ -203,6 +217,18 @@ if ( isset($order_data["billing"]["phone"]) ) {
 					<h5><a href="https://www.facebook.com/groups/morkvasupport" class="btn btn-primary" target="_blank"><?php echo '<img src="' . plugins_url('img/messenger.png', __FILE__) . '" height="25" width="25"  />'; ?> Написати в чат</a></h5>
 				</div>
 			</div>
+
+			<div class="card">
+			<div class="card-header">
+				<h3>Pro версія</h3>
+			</div>
+			<div class="card-body">
+				<p>
+				Потрібно більше можливостей? Оновіться до Pro-версії зараз!
+				</p>
+				<h5><a href="https://www.morkva.co.ua/woocommerce-plugins/avtomatychna-heneratsiia-nakladnykh-nova-poshta/" class="btn btn-success">Хочу Pro</a></h5>
+			</div>
+		</div>
 			</div>
 		</div>
 	</form>
@@ -247,7 +273,7 @@ if ( isset($order_data["billing"]["phone"]) ) {
 	
 	if (isset($order_id)) {
 		$order = wc_get_order( $order_id );
-		$note = "Номер накладної:" . $_SESSION['invoice_id'];
+		$note = "Номер накладної: " . $_SESSION['invoice_id'];
 		$order->add_order_note( $note );
 		$order->save();
 	}
