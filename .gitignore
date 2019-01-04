@@ -137,7 +137,7 @@ wp-content/plugins/wp-migrate-db
 
 
 /.idea
-/ignore-html/
+ignore-html/
 /license.txt
 /readme.html
 /sitemap.xml

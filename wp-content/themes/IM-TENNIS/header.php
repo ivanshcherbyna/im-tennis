@@ -21,7 +21,7 @@
             <div class="container">
                 <div class="d-flex align-items-center flex-wrap">
                     <div class='header-logo col-xl-3 col-lg-12 col-md-12 col-sm-12 p-0'>
-                        <img src="<?php echo $mytheme['logo-header-img']['url'] ?>" alt="logo">
+                        <a href="<?php echo get_home_url(); ?>"><img src="<?php echo $mytheme['logo-header-img']['url'] ?>" alt="logo"></a>
                     </div>
                     <ul class="header-contact-list d-flex align-items-center justify-content-start mb-0 col-xl-6 col-lg-9 col-md-8 col-sm-12 p-0 ">
                         <li class='header-text d-flex align-items-center mr-3'><span class="icon-phone mr-2"></span> <a href="<?php echo $mytheme['header-tel-1'] ?>" class='header-text-link'><?php echo $mytheme['header-tel-1'] ?></a>,
@@ -30,8 +30,9 @@
                                                                                                                   class='header-text-link d-flex align-items-center'><?php echo $mytheme['header-email'] ?></a></li>
                     </ul>
                     <ul class="header-register-list d-flex align-items-center justify-content-end  mb-0 col-xl-3 col-lg-3 col-md-4 col-sm-12 p-0 ">
-                        <li class='header-text mr-3'><a href='#' class='header-text-link d-flex align-items-center'><span class="icon-register mr-2"></span>Регистрация</a></li>
-                        <li class='header-text'><a href='#' class='header-text-link d-flex align-items-center'><span class="icon-login mr-2"></span>Войти</a></li>
+                        <li class='header-text mr-3'><a href='<?php echo home_url()?>/my-account/registration-page/' class='header-text-link d-flex align-items-center'><span class="icon-register mr-2"></span>Регистрация</a></li>
+                        <li class='header-text'><a href='/my-account' class='header-text-link d-flex align-items-center'><span class="icon-login mr-2"></span><?php do_action('my_show_user'); ?></a></li>
+
                     </ul>
                 </div>
             </div>

@@ -68,7 +68,7 @@ function tennis_styles() {
     wp_enqueue_style('bootstrap_grid_style');
     wp_register_style('bootstrap-reboot_style', get_template_directory_uri() . '/inc/urich/css/bootstrap-reboot.min.css');
     wp_enqueue_style('bootstrap-reboot_style');
-    wp_register_style('icomoon_style', get_template_directory_uri() . '/inc/urich/css/icomoon.js');
+    wp_register_style('icomoon_style', get_template_directory_uri() . '/inc/urich/css/icomoon.css');
     wp_enqueue_style('icomoon_style');
 
 }
@@ -315,6 +315,20 @@ add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
 // Remove Filters
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
 
+// Reduxframework
 include_once 'inc/loader.php';
 
+/* ---------- ADD ACTION BY SHOW USER ON FRONT-END HEADER----------------*/
+function get_user(){
+    $user_id = get_current_user_id();
+    if (!empty($user_id)) {
+        $user = get_user_by('ID', $user_id);
+        $username = $user->display_name;
+        $all_meta_for_user = get_user_meta($user_id);
+        echo $username;
+    }
+    else _e('Войти',THEME_OPT);
+}
+add_action('my_show_user','get_user');
+/* ---------- ADD ACTION BY SHOW USER ON FRONT-END HEADER----------------*/
 ?>

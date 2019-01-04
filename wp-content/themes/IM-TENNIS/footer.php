@@ -12,7 +12,17 @@ global $mytheme;
 
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-9 p-0 footer-column">
-
+                        <h4 class='footer-column-header'><?php _e('Контакты', THEME_OPT) ?></h4>
+                        <ul class='footer-column-contact'>
+                            <li class="footer-column-contact-item d-flex mb-2"><span class="icon-phone mr-3 pt-2"></span>
+                                <div>
+                                    <div><?php echo $mytheme['header-tel-1'] ?>,</div>
+                                    <div><?php echo $mytheme['header-tel-2'] ?></div>
+                                </div>
+                            </li>
+                            <li class="footer-column-contact-item d-flex align-items-center"><span class="icon-mail mr-3"></span><a href="mailto:<?php echo $mytheme['header-email'] ?>"
+                                                                                                                                    class='footer-column-contact-item'><?php echo $mytheme['header-email'] ?>-</a></li>
+                        </ul>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-9 p-0 footer-column">
 
