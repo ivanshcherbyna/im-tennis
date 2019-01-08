@@ -9,33 +9,58 @@ $redux_opt_name = THEME_OPT;
 
 if ( !function_exists( "redux_add_metaboxes" ) ):
 	function redux_add_metaboxes($metaboxes) {
-	
-	$page_options = array();
 
-	$metaSection = array(
-		'title' => 'Page meta',
-		'icon_class'    => 'icon-large',
-		'icon'          => 'el-icon-list-alt',
-		'fields' => array(
-			array(
-				'id'     => 'meta',
-				'type'   => 'text',
-				'title'  => __( 'Metafield')
-			),
-		)
-	);
+        $home_page_options = array();
+
+         $homeField1 = array(
+            'title' => 'Баннер',
+            'icon_class'    => 'icon-large',
+            'icon'          => 'el-icon-list-alt',
+            'fields' => array(
+                array(
+                    'id'     => 'banner-content-header',
+                    'type'   => 'text',
+                    'title'  => __( 'Баннер заголовок',THEME_OPT)
+                ),
+                array(
+                    'id'     => 'banner-content-text',
+                    'type'   => 'text',
+                    'title'  => __( 'Баннер  текст',THEME_OPT),
+                    'description'  => __( 'Подзаголовком текст',THEME_OPT)
+                ),
+                array(
+                    'id'     => 'banner-btn-text',
+                    'type'   => 'text',
+                    'title'  => __( 'Кнопка на баннере',THEME_OPT)
+                ),
+                array(
+                    'id'     => 'banner-btn-link',
+                    'type'   => 'text',
+                    'title'  => __( 'Ссылка на баннере',THEME_OPT)
+                ),
+                array(
+                    'id'     => 'banner-img-background',
+                    'type'     => 'media',
+                    'title'    => __('Картинка на баннере',THEME_OPT)
+                )
+            )
+        );
+    $homeField2 = array(
+
+    );
 	
-	$page_options[] = $metaSection;
+	$home_page_options[] = $homeField1;
+	$home_page_options[] = $homeField2;
 
 	$metaboxes[] = array(
-		'id'            => 'page-options',
-		'title'         => __( 'Page options', THEME_OPT ),
+		'id'            => 'home_page_options-options',
+		'title'         => __( 'Настройки страницы', THEME_OPT ),
 		'post_types'    => array( 'page' ),
-		// 'page_template' => array('template-home.php'),
+		 'page_template' => array('front-page.php'),
 		'position'      => 'normal', // normal, advanced, side
 		'priority'      => 'high', // high, core, default, low
 		'sidebar'       => false, // enable/disable the sidebar in the normal/advanced positions
-		'sections'      => $page_options,
+		'sections'      => $home_page_options,
 	);
 
 	return $metaboxes;

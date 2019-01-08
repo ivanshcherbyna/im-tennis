@@ -3,28 +3,19 @@
  * Template Name: Home
  * Template Post Type: page
  */
+global $mytheme, $post;
 
 get_header();
 ?>
 
-<div class="wrap">
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-			<?php
-            wc_get_template_part('archive-product');
-				/* Start the Loop */
-//				while ( have_posts() ) : the_post();
-//                        the_content();
-//					the_post_navigation( array(
-//						'prev_text' => '<span class="screen-reader-text">' . __( 'Previous Post', 'twentyseventeen' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Previous', 'twentyseventeen' ) . '</span> <span class="nav-title"><span class="nav-title-icon-wrapper">' < '</span>%title</span>',
-//						'next_text' => '<span class="screen-reader-text">' . __( 'Next Post', 'twentyseventeen' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Next', 'twentyseventeen' ) . '</span> <span class="nav-title">%title<span class="nav-title-icon-wrapper">' >  '</span></span>',
-//					) );
-//				endwhile; // End of the loop.
-			?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-	<?php get_sidebar(); ?>
-</div><!-- .wrap -->
+    <div class='container '>
+        <section class="banner" style="background: url(<?php echo $mytheme['banner-img-background']['url']?>) no-repeat;">
+            <div class="banner-content ">
+                <h1 class="banner-content-header"><?php echo $mytheme['banner-content-header']?></h1>
+                <h2 class="banner-content-text"><?php echo $mytheme['banner-content-text']?></h2>
+            </div>
+            <a href="<?php echo $mytheme['banner-btn-link'] ?>" class="btn-banner"><?php echo $mytheme['banner-btn-text'] ?></a>
+        </section>
+    </div>
 
 <?php get_footer();
