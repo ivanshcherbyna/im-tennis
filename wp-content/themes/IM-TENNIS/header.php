@@ -39,8 +39,11 @@
             <div class="container d-flex justify-content-between flex-wrap mt-2">
                 <?php header_nav(); ?>
                 <?php get_search_form() ?>
-                <a href="<?php echo wc_get_cart_url(); ?>" class='btn-cart d-flex align-items-center justify-content-center'><span class="icon-cart mr-2"></span>Корзина
-                    пуста</a>
+                <?php $quantityInCart=WC()->cart->get_cart_item_quantities();//GET QUANTITY ITEMS TO VIEW IN SHORT-CART_BUTTON ?>
+
+                <a href="<?php echo wc_get_cart_url(); ?>" class='btn-cart d-flex align-items-center justify-content-center'><span class="icon-cart mr-2"></span>
+                    <?php if ($quantityInCart) echo array_sum($quantityInCart); else _e('Корзина пуста', THEME_OPT); ?>
+                </a>
             </div>
             <div class='subheader'>
                 <?php subheader_nav(); ?>
