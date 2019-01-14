@@ -26,7 +26,8 @@ get_header();
         'columns' => '4',
         'meta_key' => 'total_sales',
         'orderby' => 'meta_value_num',
-        'meta_query' => WC()->query->get_meta_query()
+        'meta_query' => WC()->query->get_meta_query(),
+        'product_tag' => 'Хит'
 ]);
 
 if ($best_sell_products_query): ?>
@@ -47,7 +48,8 @@ if ($best_sell_products_query): ?>
     'columns' => '4',
     'meta_key' => 'total_sales',
     'orderby' => 'meta_value_num',
-    'meta_query' => WC()->query->get_meta_query()
+    'meta_query' => WC()->query->get_meta_query(),
+    'product_tag' => 'Акция'
 ]); ?>
 <?php if ($stock_products_query): ?>
     <section class="promotion ">
@@ -72,6 +74,7 @@ if ($best_sell_products_query): ?>
     'limit' => 10,
     'orderby' => 'date',
     'order' => 'DESC',
+    'product_tag' => 'Новинка'
 ]); ?>
 <?php if ($new_products_query): ?>
     <div class="container">

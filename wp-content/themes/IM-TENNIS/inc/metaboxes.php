@@ -13,7 +13,7 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
         $home_page_options = array();
 
          $homeField1 = array(
-            'title' => 'Баннер',
+            'title' => __( 'Баннер',THEME_OPT),
             'icon_class'    => 'icon-large',
             'icon'          => 'el-icon-list-alt',
             'fields' => array(
@@ -53,10 +53,10 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
 	$home_page_options[] = $homeField2;
 
 	$metaboxes[] = array(
-		'id'            => 'home_page_options-options',
+		'id'            => 'home_page_options',
 		'title'         => __( 'Настройки страницы', THEME_OPT ),
 		'post_types'    => array( 'page' ),
-		 'page_template' => array('front-page.php'),
+		'page_template' => array('front-page.php'),
 		'position'      => 'normal', // normal, advanced, side
 		'priority'      => 'high', // high, core, default, low
 		'sidebar'       => false, // enable/disable the sidebar in the normal/advanced positions
