@@ -1,11 +1,9 @@
 <?php get_header(); ?>
 
-<!-- main content goes here -->
-<main role="main">
-	<!-- section -->
-	<section>
-		<div class="title"><h1><?php the_title(); ?></h1></div>
+<div class="container">
+    <?php echo get_template_part('templates/breadcrumb', null); ?>
 
+    <h2 class="header-section"><?php the_title(); ?></h2>
 	<?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
 		<!-- article -->
@@ -25,14 +23,14 @@
 		<!-- article -->
 		<article>
 
-			<h2><?php _e( 'Sorry, nothing to display.', 'teatrhotel' ); ?></h2>
+			<h2><?php _e( 'Sorry, nothing to display.', THEME_OPT ); ?></h2>
 
 		</article>
 		<!-- /article -->
 
 	<?php endif; ?>
 
-	</section>
+</div>
 	<!-- /section -->
-</main>
+
 <?php get_footer(); ?>

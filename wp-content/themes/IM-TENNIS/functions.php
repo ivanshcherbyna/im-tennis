@@ -1,6 +1,6 @@
 <?php
 /*
- *  Author: Lenlay
+ *  Author: Ivan
  */
 
 define('THEME_OPT', 'mytheme', true);
@@ -318,5 +318,10 @@ remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altoget
 // Reduxframework
 include_once 'inc/loader.php';
 require_once 'inc/helpers.php';
+
+add_action( 'after_setup_theme', 'woocommerce_support' );
+function woocommerce_support() {
+    add_theme_support( 'woocommerce' );
+}
 
 ?>

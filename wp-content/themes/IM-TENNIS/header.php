@@ -14,8 +14,6 @@
     <?php
     global $mytheme, $post;
     ?>
-	<!-- wrapper -->
-	<div class="wrapper">
 
         <header>
             <div class="container">
@@ -30,7 +28,7 @@
                                                                                                                   class='header-text-link d-flex align-items-center'><?php echo $mytheme['header-email'] ?></a></li>
                     </ul>
                     <ul class="header-register-list d-flex align-items-center justify-content-end  mb-0 col-xl-3 col-lg-3 col-md-4 col-sm-12 p-0 ">
-                        <li class='header-text mr-3'><a href='<?php echo home_url()?>/my-account/registration-page/' class='header-text-link d-flex align-items-center'><span class="icon-register mr-2"></span>Регистрация</a></li>
+                        <li class='header-text mr-3'><a href='<?php get_home_url(); ?>/registration-page/' class='header-text-link d-flex align-items-center'><span class="icon-register mr-2"></span>Регистрация</a></li>
                         <li class='header-text'><a href='/my-account' class='header-text-link d-flex align-items-center'><span class="icon-login mr-2"></span><?php do_action('my_show_user'); ?></a></li>
 
                     </ul>

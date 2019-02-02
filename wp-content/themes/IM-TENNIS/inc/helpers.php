@@ -1,5 +1,6 @@
 <?php
 /* ---------- ADD ACTION BY SHOW USER ON FRONT-END HEADER----------------*/
+add_action('my_show_user','get_user');
 function get_user(){
     $user_id = get_current_user_id();
     if (!empty($user_id)) {
@@ -10,7 +11,6 @@ function get_user(){
     }
     else _e('Войти',THEME_OPT);
 }
-add_action('my_show_user','get_user');
 /* ---------- ADD ACTION BY SHOW USER ON FRONT-END HEADER----------------*/
 
 /* --------------------update minicart count with total price --------------------------*/
@@ -23,49 +23,123 @@ function woocommerce_header_add_to_cart_fragment( $fragments ) {
     $fragments['span.items-count'] = ob_get_clean();
     return $fragments;
 }
-/* --------------------update minicart count with total price--------------------------*/
+/* --------------------product slider--------------------------*/
 add_action('ProductSlider','getProductsSlider');
 function getProductsSlider($query_products){
     if(is_array($query_products)): ?>
+
         <div class="card-deck slick-slider">
-            <?php foreach($query_products as $item):
-                $product = wc_get_product($item->ID);
-                $product_name = $product->get_name();
-                $price = $product->get_regular_price().' '. __('грн', THEME_OPT);
-                ($product->get_sale_price()) ? $sale_price = $product->get_sale_price().' '. __('грн', THEME_OPT) : $sale_price = null ;
-                $product_image = get_the_post_thumbnail_url($item->ID,'medium');
-                $product_buy = $product->add_to_cart_url();
-                $product_short_desc = $product->get_short_description();
-                $tags =  get_the_terms( $item->ID, 'product_tag' );
-                (is_object($tags[0]))? $tag = __($tags[0]->name, THEME_OPT) : $tag = null ;
-                if ($tag == 'Хит' ) $tag_class = 'popular-product-label';
-                elseif ($tag == 'Новинка' ) $tag_class = 'new-products-label';
-                elseif ($tag == 'Акция' ) {
-                    $tag_class = 'promotion-products-label';
-                    $tag = round( ( $price - $sale_price ) / $price * 100 ).'%';
-                }
-                ?>
-                <div class="card text-center ">
-                    <a class='card-container-img' style='background-image: url(<?php echo $product_image ?>);'>
-                    </a>
-                    <div class="card-label <?php echo $tag_class ?>"><?php echo $tag ?></div>
-                    <div class="card-body">
-                        <a class="card-title mb-2"><?php echo $product_name ?></a>
-                        <p class="card-text"><?php echo $product_short_desc ?></p>
-                    </div>
-                    <div class="card-footer">
-                        <?php if (!$sale_price): ?>
-                            <div class="price d-flex justify-content-center"><?php echo $price ?></div>
-                        <?php else: ?>
-                            <div class="price d-flex justify-content-center"><span class='text-success mr-3'><?php echo $sale_price ?></span><span class='price-secondary'><?php echo $price ?></span></div>
-                        <?php endif; ?>
-                        <a href="<?php echo $product_buy ?>" class="btn card-btn d-flex justify-content-center align-items-center"><?php _e('Купить', THEME_OPT) ?></a>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+          <?php  get_template_part('templates/products-view')?>
         </div>
-        <a href="<?php echo get_permalink() ?>" class="products-more d-flex justify-content-center align-items-center"><?php _e('Смотреть все',THEME_OPT) ?></a>
+        <a href="<?php echo home_url()?>/shop/" class="products-more d-flex justify-content-center align-items-center"><?php _e('Смотреть все',THEME_OPT) ?></a>
 
     <?php
     endif;
 }
+add_action ('get_tags','get_blog_tags');
+
+function get_blog_tags()
+{
+    $args = array(
+        'number'       => 0,
+        'offset'       => 0,
+        'orderby'      => 'id',
+        'order'        => 'ASC',
+        'hide_empty'   => false,
+        'fields'       => 'all',
+        'slug'         => '',
+        'hierarchical' => true,
+        'name__like'   => '',
+        'pad_counts'   => false,
+        'get'          => '',
+        'child_of'     => 0,
+        'parent'       => '',
+    );
+
+    $tags = get_terms( 'post_tag', $args );
+    $html = '<div class="blog-list">';
+    $html .= '<h3 class="blog-header mb-3">'.__('Теги', THEME_OPT).'</h3>';
+    if ($tags) {
+        $html .= "<ul>";
+        foreach ($tags as $tag) {
+            $tag_link = get_tag_link($tag->term_id);
+            $html .= "<li class='blog-link-item'><a href='{$tag_link}' title='{$tag->name} Tag' class='content-link'>";
+            $html .= "{$tag->name}</a></li>";
+        }
+        $html .= '</ul>';
+        $html .= '</div>';
+        echo $html;
+    }
+}
+
+add_action ('get_cats','get_blog_cats');
+
+function get_blog_cats()
+{
+    $args = array(
+        'number'       => 0,
+        'offset'       => 0,
+        'orderby'      => 'id',
+        'order'        => 'ASC',
+        'hide_empty'   => false,
+        'fields'       => 'all',
+        'slug'         => '',
+        'hierarchical' => true,
+        'name__like'   => '',
+        'pad_counts'   => false,
+        'get'          => '',
+        'child_of'     => 0,
+        'parent'       => '',
+    );
+
+    $cats = get_terms( 'category', $args );
+    $html = '<div class="blog-list">';
+    $html .= '<h3 class="blog-header mb-3">'.__('Категории', THEME_OPT).'</h3>';
+    if ($cats) {
+        $html .= "<ul>";
+        foreach ($cats as $cat) {
+            $cat_link = get_tag_link($cat->term_id);
+            $html .= "<li class='blog-link-item'><a href='{$cat_link}' title='{$cat->name} Tag' class='content-link'>";
+            $html .= "{$cat->name}</a></li>";
+        }
+        $html .= '</ul>';
+        $html .= '</div>';
+        echo $html;
+    }
+}
+add_action ('get_last_posts','get_blog_last_posts');
+
+function get_blog_last_posts()
+{
+    $args = array(
+        'numberposts' => 5,
+        'category'    => 0,
+        'orderby'     => 'date',
+        'order'       => 'DESC',
+        'include'     => array(),
+        'exclude'     => array(),
+        'meta_key'    => '',
+        'meta_value'  =>'',
+        'post_type'   => 'post',
+        'suppress_filters' => true,
+    );
+
+    $posts = get_posts(  $args );
+    $html = '<div class="blog-list">';
+    $html .= '<h3 class="blog-header mb-3">'.__('Последние записи', THEME_OPT).'</h3>';
+    if ($posts) {
+        $html .= "<ul>";
+        foreach ($posts as $post) {
+            $post_link = get_the_permalink($post->ID);
+            $html .= "<li class='blog-link-item'><a href='{$post_link}' title='{$post->name} Tag' class='content-link'>";
+            $html .= "{$post->post_title}</a></li>";
+        }
+        $html .= '</ul>';
+        $html .= '</div>';
+        echo $html;
+
+    }
+    wp_reset_postdata();
+}
+
+

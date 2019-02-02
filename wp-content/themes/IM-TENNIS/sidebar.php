@@ -1,9 +1,10 @@
+
 <!-- sidebar -->
 <aside class="sidebar" role="complementary">
 
-	<div class="sidebar-widget">
-		<?php if(!function_exists('dynamic_sidebar') || !dynamic_sidebar('widget-area-1')) ?>
-	</div>
+   <?php  echo do_action('get_last_posts'); ?>
+   <?php  echo do_action('get_cats'); ?>
+   <?php  echo do_action('get_tags'); ?>
 
 </aside>
 <!-- /sidebar -->

@@ -36,7 +36,7 @@
 
 	<!-- article -->
 	<article>
-		<h2><?php _e( 'Sorry, nothing to display.', THEME_OPT ); ?></h2>
+		<h2><?php _e( 'Пардон, нечего отобразить на странице', THEME_OPT ); ?></h2>
 	</article>
 	<!-- /article -->
 
