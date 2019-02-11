@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 
 get_header( 'shop' );
 
-
+do_action('genesis_after_entry');
 /**
  * Hook: woocommerce_before_main_content.
  *
@@ -37,9 +37,15 @@ get_header( 'shop' );
         <h2 class="header-section"><?php woocommerce_page_title(); ?></h2>
         <section class="category_block d-flex flex-wrap">
             <div class="filter-block col-lg-3 col-md-4 col-sm-12 col-xs-12 pl-0">
-
+                <?php get_sidebar( 'shop' ); ?>
             </div>
             <div class="products-block col-lg-9 col-md-8 col-sm-12 col-12 pr-0">
+                <div class="d-none d-xl-flex d-lg-flex d-md-flex d-sm-flex align-items-center justify-content-center">
+                    <div class="products-filter-mode d-flex align-items-center justify-content-center active" onclick="filterMode(this, 'block')">
+                        <img src="<?php echo get_template_directory_uri() ?>/inc/urich/img/3.svg" alt=""></div>
+                    <div class="products-filter-mode d-flex align-items-center justify-content-center" onclick="filterMode(this, 'list')">
+                        <img src="<?php echo get_template_directory_uri() ?>/inc/urich/img/4.svg" alt=""></div>
+                </div>
                 <?php
                 get_template_part( 'templates/loop-products', null );
                 if ( woocommerce_product_loop() ) {

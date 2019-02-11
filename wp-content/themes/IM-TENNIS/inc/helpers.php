@@ -36,8 +36,8 @@ function getProductsSlider($query_products){
     <?php
     endif;
 }
-add_action ('get_tags','get_blog_tags');
 
+add_action ('get_tags','get_blog_tags');
 function get_blog_tags()
 {
     $args = array(
@@ -73,7 +73,6 @@ function get_blog_tags()
 }
 
 add_action ('get_cats','get_blog_cats');
-
 function get_blog_cats()
 {
     $args = array(
@@ -107,8 +106,8 @@ function get_blog_cats()
         echo $html;
     }
 }
-add_action ('get_last_posts','get_blog_last_posts');
 
+add_action ('get_last_posts','get_blog_last_posts');
 function get_blog_last_posts()
 {
     $args = array(
@@ -142,4 +141,20 @@ function get_blog_last_posts()
     wp_reset_postdata();
 }
 
+add_action( 'genesis_after_entry', 'shop_filter' );
+function be_display_spain_posts() {
+    $loop = new WP_Query( array(
+        'posts_per_page' => 5,
+        'category_name' => 'spain',
+    ) );
 
+    if( $loop->have_posts() ):
+        echo '<h3>Recent posts about Spain</h3>';
+        echo '<ul>';
+        while( $loop->have_posts() ): $loop->the_post();
+            echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+        endwhile;
+        echo '</ul>';
+    endif;
+    wp_reset_postdata();
+}

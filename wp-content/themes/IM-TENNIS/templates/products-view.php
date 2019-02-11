@@ -38,9 +38,7 @@ if (have_posts()): while (have_posts()) : the_post();
                 </div>
 
 <?php endwhile;?>
-    <!-- add two empty blocks -->
-    <div class="card card-empty text-center "></div>
-    <div class="card card-empty text-center "></div>
+
 
 <?php endif; ?>
 

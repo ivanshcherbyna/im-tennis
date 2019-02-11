@@ -45,10 +45,12 @@ function tennis_scripts()
         wp_enqueue_script('my_bootstrap');
         wp_register_script('my_jquery', get_template_directory_uri() . '/inc/urich/js/jquery.min.js', array('jquery'), '3.3.1',true);
         wp_enqueue_script('my_jquery');
-        wp_register_script('my_scripts', get_template_directory_uri() . '/inc/urich/js/scripts.min.js', array('jquery'), '',true); // Custom scripts
+        wp_register_script('my_scripts', get_template_directory_uri() . '/inc/urich/js/scripts.min.js', array('jquery'), false,true); // Custom scripts
         wp_enqueue_script('my_scripts');
-        wp_register_script('my_slick', get_template_directory_uri() . '/inc/urich/js/slick.js', array('jquery'), '1.0.0',true);
+        wp_register_script('my_slick', get_template_directory_uri() . '/inc/urich/js/slick.js', array('jquery'), 'false',true);
         wp_enqueue_script('my_slick');
+        wp_register_script('my_common', get_template_directory_uri() . '/inc/urich/js/common.js', array('jquery'), false,true);
+        wp_enqueue_script('my_common');
     }
 }
 
@@ -323,5 +325,44 @@ add_action( 'after_setup_theme', 'woocommerce_support' );
 function woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
+function be_display_custom_posts($query)
+{
+//    query_posts([
+//        'posts_per_page' => -1,
+//        'meta_query' => array(
+//                'key' => 'price',
+//                'value' => 0,
+//                //'type' => 'numeric',
+//                'compare' => '>',
+//                'post_type' => 'product',
+//                'post_status' => 'publish',
+//                'columns' => '4',
+//                'meta_key' => 'total_sales',
+//                'meta_query' => WC()->query->get_meta_query(),
+//                'limit' => 10,
+//                'orderby' => 'date',
+//                'order' => 'DESC',
+//                'product_tag' => 'Новинка'
+//        )
+//    ]);
 
+//    if ($query->is_main_query() && !$query->is_feed() && !is_admin() && $query->is_post_type_archive('event')) {
+////        $meta_query = array(
+////            array(
+////                'key' => 'be_events_manager_end_date',
+////                'value' => time(),
+////                'compare' => '>'
+////            )
+////        );
+////        $query->set('meta_query', $meta_query);
+//        $query->set('orderby', 'meta_value_num');
+//        $query->set('meta_key', 'be_events_manager_start_date');
+//        $query->set('order', 'ASC');
+//        $query->set('posts_per_page', '4');
+//    }
+//    https://wordpress.stackexchange.com/questions/221760/how-do-i-query-for-posts-by-partial-meta-key
+//    https://stackoverflow.com/questions/24216915/pagination-in-woocommerce
+//    https://www.billerickson.net/customize-the-wordpress-query/
+}
+add_action( 'genesis_after_entry', 'be_display_custom_posts' );
 ?>
